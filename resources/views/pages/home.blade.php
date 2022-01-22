@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title-complement', '- Home')
+@section('title-complement', ' - Home')
 @section('content')
 	{{-- Page Heading --}}
 	<h1 class="h3 mb-4 text-gray-800">{{__('Contacts')}}</h1>
