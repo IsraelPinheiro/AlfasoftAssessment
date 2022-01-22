@@ -22,9 +22,9 @@ class CreateProfilesTable extends Migration{
             $table->boolean('users_update')->default(false);    //Flag that controls if the user can update an existing user entry
             $table->boolean('users_delete')->default(false);    //Flag that controls if the user can delete an existing user entry
             //Contacts
-            $table->boolean('users_create')->default(false);    //Flag that controls if the user can create a new user entry
-            $table->boolean('users_update')->default(false);    //Flag that controls if the user can update an existing user entry
-            $table->boolean('users_delete')->default(false);    //Flag that controls if the user can delete an existing user entry
+            $table->boolean('contacts_create')->default(false);    //Flag that controls if the user can create a new contact entry
+            $table->boolean('contacts_update')->default(false);    //Flag that controls if the user can update an existing contact entry
+            $table->boolean('contacts_delete')->default(false);    //Flag that controls if the user can delete an existing contact entry
             //Controll
             $table->timestamps();   //created_at and updated_at
             $table->softDeletes();  //deleted_at
