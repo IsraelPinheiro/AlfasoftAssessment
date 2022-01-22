@@ -29,7 +29,7 @@
         {{-- Nav Item - Users --}}
         @if(Auth::user()->profile->users_read)
             <li class="nav-item">
-                <a class="nav-link pt-0" href="#">
+                <a class="nav-link pt-0" href="{{ route('users.index') }}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>{{__("Users")}}</span>
                 </a>
@@ -38,7 +38,7 @@
         {{-- Nav Item - Profiles --}}
         @if(Auth::user()->profile->profiles_read)
         <li class="nav-item">
-            <a class="nav-link pt-0" href="#">
+            <a class="nav-link pt-0" href="{{ route('profiles.index') }}">
                 <i class="fas fa-fw fa-users"></i>
                 <span>{{__("Profiles")}}</span>
             </a>
