@@ -27,9 +27,13 @@ class UserController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(){
+        if(Auth::user()->profile->users_create){
+            return view('pages.users.new');
+        }
+        else{
+            abort(401);
+        }
     }
 
     /**
@@ -38,8 +42,7 @@ class UserController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         //
     }
 
@@ -49,9 +52,13 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id){
+        if(Auth::user()->profile->users_read){
+            return view('pages.users.show');
+        }
+        else{
+            abort(401);
+        }
     }
 
     /**
@@ -60,9 +67,13 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id){
+        if(Auth::user()->profile->users_edit){
+            return view('pages.users.edit');
+        }
+        else{
+            abort(401);
+        }
     }
 
     /**
@@ -72,8 +83,7 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         //
     }
 
@@ -83,8 +93,7 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         //
     }
 }
