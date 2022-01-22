@@ -18,11 +18,8 @@ class CreateUsersTable extends Migration{
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('active')->default(true);
             $table->string('password');
-            //User permissions
-            $table->boolean('can_create')->default(false);  //Flag that controls if the user can create a new entry
-            $table->boolean('can_update')->default(false);  //Flag that controls if the user can update an existing entry
-            $table->boolean('can_delete')->default(false);  //Flag that controls if the user can delete an existing entry
             $table->rememberToken();
+            //Controll
             $table->timestamps();   //created_at and updated_at
             $table->softDeletes();  //deleted_at
             $table->bigInteger('created_by')->unsigned();
