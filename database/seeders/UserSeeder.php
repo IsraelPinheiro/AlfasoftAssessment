@@ -17,7 +17,7 @@ class UserSeeder extends Seeder{
         DB::table('users')->delete();
         User::create([
             'name' => 'Administrador',
-            'email' => 'admin@contacts.com.br',
+            'email' => 'admin@contacts.com',
             'password' => Hash::make('admin'),
             'profile_id' => 1,
             'created_by' => 1
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder{
 
         User::create([
             'name' => 'Manager',
-            'email' => 'manager@contacts.com.br',
+            'email' => 'manager@contacts.com',
             'password' => Hash::make('manager'),
             'profile_id' => 2,
             'created_by' => 1
