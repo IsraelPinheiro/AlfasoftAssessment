@@ -35,7 +35,7 @@ $(function(){
 	});
 	$('.datatable').DataTable();
     //Set Search input and function
-	$('#Search').keyup(function(){
+	$('#Search,#SearchXS').keyup(function(){
 		dataTable.search($(this).val()).draw();
 	});
 });
