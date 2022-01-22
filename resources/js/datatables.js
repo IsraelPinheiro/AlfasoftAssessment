@@ -19,3 +19,5 @@ require('datatables.net-searchbuilder-bs4');
 require('datatables.net-searchpanes-bs4');
 require('datatables.net-select-bs4');
 require('datatables.net-staterestore-bs4');
+//Initialization
+require('./datatables.init')
