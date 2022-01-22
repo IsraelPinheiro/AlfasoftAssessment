@@ -11,8 +11,16 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        // \App\Models\User::factory(10)->create();
+    public function run(){
+        $this->call(ProfileSeeder::class);
+        $this->call(UserSeeder::class);
+        //Seeders to be run only on dev environment
+        if(app()->environment('dev')){
+           
+        }
+        //Seeders to be run only on production environment
+        if(app()->environment('production')){
+            
+        }
     }
 }
