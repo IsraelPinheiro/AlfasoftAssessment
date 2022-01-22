@@ -49,15 +49,15 @@
                 {{-- Dropdown - User Information --}}
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">
-                        <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400 btn-options-password"></i> {{ __('Change Password') }}
+                        <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400 btn-password"></i> {{ __('Change Password') }}
                     </a>
                     {{-- Divider --}}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">
-                        <i class="fas fa-info-circle fa-sm fa-fw mr-2 text-gray-400 btn-options-about"></i> {{ __('About') }}
+                        <i class="fas fa-info-circle fa-sm fa-fw mr-2 text-gray-400 btn-about"></i> {{ __('About') }}
                     </a>
                     <a class="dropdown-item" href="#">
-                        <i class="fas fa-question-circle fa-sm fa-fw mr-2 text-gray-400 btn-options-help"></i> {{ __('Help') }}
+                        <i class="fas fa-question-circle fa-sm fa-fw mr-2 text-gray-400 btn-help"></i> {{ __('Help') }}
                     </a>
                     {{-- Divider --}}
                     <div class="dropdown-divider"></div>
