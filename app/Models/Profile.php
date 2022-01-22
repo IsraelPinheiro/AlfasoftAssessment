@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Profile extends Model{
     use HasFactory, SoftDeletes;
+
+    //Profile's Users
+    public function users(){
+        return $this->hasMany(User::class);
+    }
 }
