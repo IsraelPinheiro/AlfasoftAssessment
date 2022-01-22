@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Home
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
+//Auth related routes
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Routes related do Contacts management
+Route::resource('photos', PhotoController::class)->except(['index'])->middleware('auth');
+
+//Routes related do Users management
+Route::resource('users', UserController::class)->middleware('auth');
