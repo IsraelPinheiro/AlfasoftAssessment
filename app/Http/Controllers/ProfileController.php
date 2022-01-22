@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -12,9 +13,14 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(){
+        if(Auth::user()->profile->profiles_read){
+            $profiles = Profile::all();
+            return view('pages.profiles.index',compact('profiles'));
+        }
+        else{
+            abort(401);
+        }
     }
 
     /**
