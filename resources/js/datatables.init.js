@@ -9,10 +9,10 @@ $(function(){
 			'csvHtml5',
 			'pdfHtml5'
 		],
-		"lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Todos"]],
+		"lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
 		"pageLength": 15,
 		"language": {
-			"sLengthMenu": "_MENU_  ",//"_MENU_ itens por página",
+			"sLengthMenu": "_MENU_"
 		},
 		responsive: true,
 		pageResize: true,
@@ -31,8 +31,6 @@ $(function(){
 			$('.dt-buttons').find('button').removeClass('btn-secondary');
 			$('.dt-buttons').find('button').addClass('btn-primary')
 			$('.dt-buttons').addClass('float-right pb-2');
-			$('.dataTables_length').find('select').removeClass('custom-select-sm');
-			//$('.dataTables_length').remove();
 		}
 	});
 	$('.datatable').DataTable();
