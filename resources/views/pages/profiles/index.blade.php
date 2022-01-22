@@ -28,7 +28,6 @@
 					<td class="text-center">{{ $profile->users->count() }}</td>
 					<td class="toolbox text-center">
                         <i data-id={{$profile->id}} class="fas fa-eye fa-lg btn-profiles-show pr-1" title="{{__('Show')}}"></i>
-                        <i data-id={{$profile->id}} class="fas fa-list fa-lg btn-profiles-list-users pr-1" title="{{__('List Users')}}"></i>
                         @if(Auth::check())
                             @if(Auth::user()->profile->profiles_update)
                                 <i data-id={{$profile->id}} class="fas fa-edit fa-lg btn-profiles-edit text-primary pr-1" title="{{__('Edit')}}"></i>
