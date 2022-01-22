@@ -1,5 +1,5 @@
 window._ = require('lodash');
-
+import jQuery from 'jquery';
 try {
     window.$ = window.jQuery = jQuery;
     require('popper.js');
