@@ -17,14 +17,19 @@ class CreateProfilesTable extends Migration{
             $table->text('description')->nullable()->default(null);
             //Access Controll
             //Contacts
-            $table->boolean('contacts_create')->default(false);    //Flag that controls if the user can create a new contact entry
-            $table->boolean('contacts_update')->default(false);    //Flag that controls if the user can update an existing contact entry
-            $table->boolean('contacts_delete')->default(false);    //Flag that controls if the user can delete an existing contact entry
-            //User 
+            $table->boolean('contacts_create')->default(false);     //Flag that controls if the user can create a new contact entry
+            $table->boolean('contacts_update')->default(false);     //Flag that controls if the user can update an existing contact entry
+            $table->boolean('contacts_delete')->default(false);     //Flag that controls if the user can delete an existing contact entry
+            //Users
             $table->boolean('users_create')->default(false);    //Flag that controls if the user can create a new user entry
             $table->boolean('users_read')->default(false);      //Flag that controls if the user can access the users index page
             $table->boolean('users_update')->default(false);    //Flag that controls if the user can update an existing user entry
             $table->boolean('users_delete')->default(false);    //Flag that controls if the user can delete an existing user entry
+            //Profiles
+            $table->boolean('profiles_create')->default(false);     //Flag that controls if the user can create a new profile entry
+            $table->boolean('profiles_read')->default(false);       //Flag that controls if the user can access the profile index page
+            $table->boolean('profiles_update')->default(false);     //Flag that controls if the user can update an existing profile entry
+            $table->boolean('profiles_delete')->default(false);     //Flag that controls if the user can delete an existing profile entry
             //Controll
             $table->timestamps();   //created_at and updated_at
             $table->softDeletes();  //deleted_at
