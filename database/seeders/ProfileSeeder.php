@@ -24,6 +24,10 @@ class ProfileSeeder extends Seeder{
             'users_read' => true,
             'users_update' => true,
             'users_delete' => true,
+            'profiles_create' => true,
+            'profiles_read' => true,
+            'profiles_update' => true,
+            'profiles_delete' => true,
             'created_by' => 1
         ]);
         $this->command->info('Administrator Profile Created');
@@ -37,6 +41,10 @@ class ProfileSeeder extends Seeder{
             'users_read' => false,
             'users_update' => false,
             'users_delete' => false,
+            'profiles_create' => false,
+            'profiles_read' => false,
+            'profiles_update' => false,
+            'profiles_delete' => false,
             'created_by' => 1
         ]);
         $this->command->info('Administrator Profile Created');
