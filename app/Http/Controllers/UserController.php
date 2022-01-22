@@ -143,7 +143,7 @@ class UserController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
-        if(Auth::user()->profile->users_update){
+        if(Auth::user()->profile->users_delete){
             $user = User::find($id);
             if($user){
                 if(Auth::user()->id!=$user->id){
