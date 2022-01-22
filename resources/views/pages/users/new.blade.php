@@ -22,7 +22,7 @@
 		<div class="row">
 			<div class="col-md-6">
                 <div class="form-group">
-                    <label for="Profile">{{__('Perfil')}}</label>
+                    <label for="Profile">{{__('Profile')}}</label>
                     <select name="Profile" class="form-control">
                         <option selected disabled>{{__('Select a Profile')}}</option>
                         @foreach ($profiles as $profile)
