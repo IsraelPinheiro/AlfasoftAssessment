@@ -75,7 +75,8 @@ class UserController extends Controller{
      */
     public function show($id){
         if(Auth::user()->profile->users_read){
-            return view('pages.users.show');
+            $user = User::find($id);
+            return view('pages.users.show', compact('user'));
         }
         else{
             abort(401);
