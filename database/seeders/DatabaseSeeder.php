@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         //Seeders to be run only on dev environment
         if(app()->environment('dev')){
-           
+            $this->call(ContactSeeder::class);
         }
         //Seeders to be run only on production environment
         if(app()->environment('production')){
