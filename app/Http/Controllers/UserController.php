@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller{
     /**
@@ -29,7 +31,8 @@ class UserController extends Controller{
      */
     public function create(){
         if(Auth::user()->profile->users_create){
-            return view('pages.users.new');
+            $profiles = Profile::all();
+            return view('pages.users.new', compact('profiles'));
         }
         else{
             abort(401);
@@ -43,7 +46,25 @@ class UserController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        //
+        if(Auth::user()->profile->users_create){
+            $request->validate([
+                'Name' => 'bail|required|min:3|string',
+                'Email' => 'bail|required|email|unique:users,email',
+                'Profile' => 'bail|required',
+                'Password' => 'bail|required|min:6|confirmed'
+            ]);
+            $user = new User;
+            $user->name = $request->Name;
+            $user->email = $request->Email;
+            $user->profile_id = $request->Profile;
+            $user->password = Hash::make($request->Password);
+            $user->created_by = Auth::user()->id;
+            $user->save();
+            return response()->json(['message' => __('User Created')],200);
+        }
+        else{
+            abort(401);
+        }
     }
 
     /**
@@ -68,8 +89,10 @@ class UserController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function edit($id){
-        if(Auth::user()->profile->users_edit){
-            return view('pages.users.edit');
+        if(Auth::user()->profile->users_update){
+            $user = User::find($id);
+            $profiles = Profile::all();
+            return view('pages.users.edit', compact('user','profiles'));
         }
         else{
             abort(401);
@@ -84,7 +107,32 @@ class UserController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
-        //
+        if(Auth::user()->profile->users_update){
+            $user = User::find($id);
+            if($user){
+                $request->validate([
+                    'Name' => 'bail|required|min:3|string',
+                    'Email' => 'bail|required|email|unique:users,email,'.$user->id,
+                    'Password' => 'sometimes|nullable|min:6|confirmed'
+                ]);
+                $user->name = $request->Name;
+                $user->email = $request->Email;
+                $user->profile_id = $request->Profile;
+                $user->active = $request->Status;
+                if($request->Password!=''){
+                    $user->password = Hash::make($request->Password);
+                }
+                $user->updated_by = Auth::user()->id;
+                $user->save();
+                return response()->json(['level' => 'success','message' => 'User Updated'],200);
+            }
+            else{
+                return response()->json(['message' => 'User not Found'],404);
+            }
+        }
+        else{
+            abort(401);
+        }
     }
 
     /**
@@ -94,6 +142,23 @@ class UserController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
-        //
+        if(Auth::user()->profile->users_update){
+            $user = User::find($id);
+            if($user){
+                if(Auth::user()->id!=$user->id){
+                    $user->delete();
+                    return response()->json(['level' => 'success','message' => 'User Deleted'],200);
+                }
+                else{
+                    return response()->json(['message' => "The currently logged in User can't be deleted"],403);
+                }
+            }
+            else{
+                return response()->json(['message' => 'User not found'],404);
+            }
+        }
+        else{
+            abort(401);
+        }
     }
 }
