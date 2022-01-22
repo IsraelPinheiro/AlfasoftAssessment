@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class ProfileController extends Controller
-{
+class ProfileController extends Controller{
     /**
      * Display a listing of the resource.
      *
@@ -78,9 +77,14 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show(Profile $profile)
-    {
-        //
+    public function show(Profile $profile){
+        if(Auth::user()->profile->profiles_read){
+            $profile = Profile::find($profile->id);
+            return view('pages.profiles.show', compact('profile'));
+        }
+        else{
+            abort(401);
+        }
     }
 
     /**
@@ -89,9 +93,14 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function edit(Profile $profile)
-    {
-        //
+    public function edit(Profile $profile){
+        if(Auth::user()->profile->profiles_update){
+            $profile = Profile::find($profile->id);
+            return view('pages.profiles.edit', compact('profile'));
+        }
+        else{
+            abort(401);
+        }
     }
 
     /**
@@ -101,9 +110,39 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile)
-    {
-        //
+    public function update(Request $request, Profile $profile){
+        if(Auth::user()->profile->profiles_create){
+            $profile = Profile::find($profile->id);
+            if($profile){
+                $request->validate([
+                    'Name' => 'bail|required|min:3|string|unique:profiles,'.$profile->id
+                ]);
+                $profile = new Profile;
+                $profile->name = $request->Name;
+                $profile->description = $request->Description;
+                $profile->contacts_create = $request->contacts_create ? 1:0;
+                $profile->contacts_update = $request->contacts_update ? 1:0;
+                $profile->contacts_delete = $request->contacts_delete ? 1:0;
+                $profile->users_create = $request->users_create ? 1:0;
+                $profile->users_read = $request->users_read ? 1:0;
+                $profile->users_update = $request->users_update ? 1:0;
+                $profile->users_delete = $request->users_delete ? 1:0;
+                $profile->profiles_create = $request->profiles_create ? 1:0;
+                $profile->profiles_read = $request->profiles_read ? 1:0;
+                $profile->profiles_update = $request->profiles_update ? 1:0;
+                $profile->profiles_delete = $request->profiles_delete ? 1:0;
+                $profile->created_by = Auth::user()->id;
+                $profile->updated_by = Auth::user()->id;
+                $profile->save();
+                return response()->json(['level' => 'success','message' => 'Profile Updated'],200);
+            }
+            else{
+                return response()->json(['message' => 'Profile not Found'],404);
+            }
+        }
+        else{
+            abort(401);
+        }
     }
 
     /**
